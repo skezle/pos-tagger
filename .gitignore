@@ -1,0 +1,5 @@
+# ignore the zipped data files
+*.gz
+# ignore any other data files
+.csv
+.json
