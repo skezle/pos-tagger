@@ -64,18 +64,18 @@ with tf.Graph().as_default():
 	with sess.as_default():
 		# Initialize model
 		pos_tagger = PoSTagger(
-			num_classes=num_outputTags, 
-			vocab_size=FLAGS.vocab_size, 
-			embedding_size=FLAGS.embedding_dim, 
+			num_classes=num_outputTags,
+			vocab_size=FLAGS.vocab_size,
+			embedding_size=FLAGS.embedding_dim,
 			past_words=FLAGS.past_words
 		)
 
 		# Define training procedure
 		global_step = tf.Variable(0, name="global_step", trainable=False)
 		# TODO: Define an optimizer, e.g. AdamOptimizer
-		optimizer = ...
+		optimizer = tf.train.AdamOptimizer()
 		# TODO: Define an optimizer step
-		train_op = ...
+		train_op = optimizer.minimize(pos_tagger.loss)
 
 		# Output directory for models and summaries
 		timestamp = str(int(time.time()))
@@ -107,7 +107,7 @@ with tf.Graph().as_default():
 		sess.run(tf.global_variables_initializer())
 		sess.graph.finalize()
 
-		# Define training and dev steps (batch) 
+		# Define training and dev steps (batch)
 		def train_step(x_batch, y_batch):
 			"""
 			A single training step
