@@ -62,7 +62,7 @@ def load_data_and_labels(data_file_path, max_vocabSize, past_words):
 					elif words[j-k] in word_toId: # word in vocabulary
 						pastWords_ids.append(word_toId[ words[j-k] ])
 					else: # word not in vocabulary
-						pastWords_ids.append(0) # <UNK>	
+						pastWords_ids.append(0) # <UNK>
 				x.append(pastWords_ids)
 
 	return [np.array(x), np.array(y), len(unique_posTags)]
@@ -90,7 +90,7 @@ def load_data_and_labels_test(data_file_path, past_words):
 			pairs = sentence.strip().split(" ")
 			words, pos_tags = zip(*(pair.split("/") for pair in pairs if len(pair.split("/")) == 2))
 			for j in range(len(words)): # for each word in the sentence
-				if pos_tags[j] in pos_toId: 
+				if pos_tags[j] in pos_toId:
 					y.append(pos_toId[ pos_tags[j] ])
 				else:
 					y.append(0) # TODO: This is not correct, but we should have seen all posible output tags in advance...
@@ -101,7 +101,7 @@ def load_data_and_labels_test(data_file_path, past_words):
 					elif words[j-k] in word_toId: # word in vocabulary
 						pastWords_ids.append(word_toId[ words[j-k] ])
 					else: # word not in vocabulary
-						pastWords_ids.append(0) # <UNK>	
+						pastWords_ids.append(0) # <UNK>
 				x.append(pastWords_ids)
 
 	return [np.array(x), np.array(y)]
@@ -125,4 +125,3 @@ def batch_iter(data, batch_size, num_epochs, shuffle=True):
 			start_index = batch_num * batch_size
 			end_index = min((batch_num + 1) * batch_size, data_size)
 			yield shuffled_data[start_index:end_index]
-
